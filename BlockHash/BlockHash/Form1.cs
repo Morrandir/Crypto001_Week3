@@ -98,7 +98,6 @@ namespace BlockHash
 
                     Invoke(new Action(() => {
                         progressBar.Maximum = (int)(nBlocks - 1);
-                        progressBar.Step = 1;
                     }));
 
                     iBlocks = nBlocks - 1;
@@ -116,8 +115,6 @@ namespace BlockHash
                         }
 
                         blockHash = sha256.ComputeHash(fileChunk, 0, (int)(BLOCK_SIZE + 256 / 8));
-
-                        Invoke(new Action(() => { progressBar.PerformStep(); }));
 
                     }
 
@@ -150,12 +147,7 @@ namespace BlockHash
                 }
                 finally
                 {
-                    Invoke(new Action(() =>
-                    {
-                        button_C.Enabled = false;
-                        button_Browse.Enabled = true;
-                        label_Time.Text = "Calculation completed.";
-                    }));
+
                     if (file != null)
                     {
                         file.Close();
@@ -165,6 +157,13 @@ namespace BlockHash
                     {
                         timerThread.Abort();
                     }
+                    Invoke(new Action(() =>
+                    {
+                        button_C.Enabled = false;
+                        button_Browse.Enabled = true;
+                        label_Time.Text = "Calculation completed.";
+                        progressBar.Value = progressBar.Maximum;
+                    }));
                 }
             }
         }
@@ -178,10 +177,10 @@ namespace BlockHash
         {
             double dTime;
             long dBlocks;
+            long interval_Blocks;
             long rTime;
-            int counter;
 
-            counter = 0;
+            interval_Blocks = nBlocks;
 
             while (true)
             {
@@ -189,7 +188,13 @@ namespace BlockHash
                 dBlocks = nBlocks - iBlocks;
                 rTime = (long)(dTime / (double)dBlocks * (double)iBlocks / (double)1000);
 
-                if (counter++ > 0)  // don't output the first timer because it tends to be too inaccurate.
+                Invoke(new Action(() => {
+                    progressBar.Step = (int)(interval_Blocks - iBlocks);
+                    interval_Blocks -= (long)progressBar.Step;
+                    progressBar.PerformStep();
+                }));
+
+                if (dBlocks > 1)  // don't output the first timer because it tends to be too inaccurate.
                 {
                     Invoke(new Action<long>((time) => {
                         label_Time.Text = (time / 3600).ToString() + ":" +
@@ -198,7 +203,7 @@ namespace BlockHash
                             " remaining..."; }), rTime);
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
             }
 
         }

@@ -36,8 +36,7 @@ namespace BlockHash
 
 
         [DllImport("user32.dll")]
-        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr
-        wParam, IntPtr lParam);
+        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
         
         private void button_Browse_Click(object sender, EventArgs e)
         {

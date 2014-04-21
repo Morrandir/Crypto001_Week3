@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button_Browse = new System.Windows.Forms.Button();
-            this.textBox_Result = new System.Windows.Forms.TextBox();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.textBox_Result = new System.Windows.Forms.TextBox();
+            this.button_Browse = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.button_C = new System.Windows.Forms.Button();
+            this.label_Time = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,6 +44,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.label_Time);
+            this.groupBox1.Controls.Add(this.button_C);
             this.groupBox1.Controls.Add(this.progressBar);
             this.groupBox1.Controls.Add(this.textBox_Result);
             this.groupBox1.Controls.Add(this.button_Browse);
@@ -52,6 +56,22 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Choose a file to reveal its SHA256 hash";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(6, 93);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(459, 23);
+            this.progressBar.TabIndex = 2;
+            // 
+            // textBox_Result
+            // 
+            this.textBox_Result.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_Result.Location = new System.Drawing.Point(6, 45);
+            this.textBox_Result.Name = "textBox_Result";
+            this.textBox_Result.ReadOnly = true;
+            this.textBox_Result.Size = new System.Drawing.Size(459, 20);
+            this.textBox_Result.TabIndex = 1;
             // 
             // button_Browse
             // 
@@ -65,25 +85,28 @@
             this.button_Browse.UseVisualStyleBackColor = true;
             this.button_Browse.Click += new System.EventHandler(this.button_Browse_Click);
             // 
-            // textBox_Result
-            // 
-            this.textBox_Result.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_Result.Location = new System.Drawing.Point(6, 45);
-            this.textBox_Result.Name = "textBox_Result";
-            this.textBox_Result.ReadOnly = true;
-            this.textBox_Result.Size = new System.Drawing.Size(459, 20);
-            this.textBox_Result.TabIndex = 1;
-            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
-            // progressBar
+            // button_C
             // 
-            this.progressBar.Location = new System.Drawing.Point(6, 93);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(459, 23);
-            this.progressBar.TabIndex = 2;
+            this.button_C.Enabled = false;
+            this.button_C.Location = new System.Drawing.Point(478, 93);
+            this.button_C.Name = "button_C";
+            this.button_C.Size = new System.Drawing.Size(81, 23);
+            this.button_C.TabIndex = 3;
+            this.button_C.Text = "Cancel";
+            this.button_C.UseVisualStyleBackColor = true;
+            this.button_C.Click += new System.EventHandler(this.button_C_Click);
+            // 
+            // label_Time
+            // 
+            this.label_Time.AutoSize = true;
+            this.label_Time.Location = new System.Drawing.Point(7, 136);
+            this.label_Time.Name = "label_Time";
+            this.label_Time.Size = new System.Drawing.Size(0, 13);
+            this.label_Time.TabIndex = 4;
             // 
             // Form1
             // 
@@ -109,6 +132,8 @@
         private System.Windows.Forms.Button button_Browse;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button button_C;
+        private System.Windows.Forms.Label label_Time;
     }
 }
 
